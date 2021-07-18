@@ -1,0 +1,38 @@
+React & Node.js ИНТЕРНЕТ МАГАЗИН С НУЛЯ. PERN stack PostgreSQL + express + React js + node.js
+https://www.youtube.com/watch?v=H2GCkRF9eko
+
+  Stack технологий  - BackEnd:
+------------------------------------
+1. Node JS
+2. Express - фреймворк для написания серверной части на NodeJS
+3. PostgreSQL - система управления баз данных
+4. Sequelize - ORM для реляционных баз данных
+
+  Stack технологий  - FrontEnd:
+------------------------------------
+1. React JS
+2. React bootstrap - graphica
+3. Axios - requests to Server
+4. React-router-dom - Navigation
+5. MobX - State Management
+
+-------------------------------------------------------------
+cd server
+npm init -y
+npm i express pg pg-hstore sequelize cors dotenv
+npm i -D nodemon
+npm run dev
+
+
+
+package.json
+"scripts": {
+    "dev": "nodemon index.js"
+  },
+
+
+-------------------------------------------------------------
+download PostgreSQL
+password for db superuser (postgres): qazqwe
+port: 5432
+use pgAdmin
