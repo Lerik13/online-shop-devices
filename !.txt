@@ -19,16 +19,23 @@ https://www.youtube.com/watch?v=H2GCkRF9eko
 -------------------------------------------------------------
 cd server
 npm init -y
-npm i express pg pg-hstore sequelize cors dotenv
+npm i express pg pg-hstore sequelize cors dotenv	
 npm i -D nodemon
 npm run dev
-
-
 
 package.json
 "scripts": {
     "dev": "nodemon index.js"
   },
+
+
+// pg - BD PostgreSQL
+// pg-hstore -
+// sequelize -  ORM - Технология для связывания программного кода с БД
+// cors - для отправки запросов с браузера, для обращения к серверу
+// dotenv - переменные окружения
+// nodemon - перезапуск сервера автоматически
+
 
 
 -------------------------------------------------------------
