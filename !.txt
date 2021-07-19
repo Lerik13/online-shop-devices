@@ -28,7 +28,7 @@ package.json
     "dev": "nodemon index.js"
   },
 
-
+// express - постороение каркаса с помю Router
 // pg - BD PostgreSQL
 // pg-hstore -
 // sequelize -  ORM - Технология для связывания программного кода с БД
