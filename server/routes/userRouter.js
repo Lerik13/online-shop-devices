@@ -1,11 +1,10 @@
 const Router = require('express')
 const router = new Router()
+const userController = require('../controllers/userController')
 
-router.post('/registration',)
-router.post('/login',)
+router.post('/registration', userController.registration)
+router.post('/login', userController.login)
 // Check if user is autorized
-router.get('/auth', (req, res) => {
-	res.json({message: 'ALL WORKING'})
-})
+router.get('/auth', userController.check)
 
 module.exports = router

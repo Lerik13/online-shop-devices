@@ -1,3 +1,5 @@
+https://github.com/h5bp/Front-end-Developer-Interview-Questions#js-questions
+
 React & Node.js ИНТЕРНЕТ МАГАЗИН С НУЛЯ. PERN stack PostgreSQL + express + React js + node.js
 https://www.youtube.com/watch?v=H2GCkRF9eko
 
@@ -43,3 +45,9 @@ download PostgreSQL
 password for db superuser (postgres): qazqwe
 port: 5432
 use pgAdmin
+--------------------------------------------------------------
+
+web.postman.co  - API-client, кот-й позволяет отправлять запросы на сервер
+--------------------------------------------------------
+
+static function in class можно выхывать без создания объекта
