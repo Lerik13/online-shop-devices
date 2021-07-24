@@ -24,7 +24,9 @@ npm init -y
 npm i express pg pg-hstore sequelize cors dotenv	
 npm i -D nodemon
 npm run dev
-
+npm i express-fileupload
+npm i uuid
+--------------------
 package.json
 "scripts": {
     "dev": "nodemon index.js"
@@ -37,7 +39,8 @@ package.json
 // cors - для отправки запросов с браузера, для обращения к серверу
 // dotenv - переменные окружения
 // nodemon - перезапуск сервера автоматически
-
+// express-fileupload - для загрузки/сохр-я картинки на сервер
+// uuid - генерация уникального идентификатора ID
 
 
 -------------------------------------------------------------
