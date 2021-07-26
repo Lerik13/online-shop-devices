@@ -24,10 +24,11 @@ cd server
 npm init -y
 npm i express pg pg-hstore sequelize cors dotenv	
 npm i -D nodemon
-npm run dev
 npm i express-fileupload
 npm i uuid
 npm i jsonwebtoken bcrypt
+
+npm run dev
 --------------------
 package.json
 "scripts": {
@@ -53,10 +54,17 @@ port: 5432
 use pgAdmin
 --------------------------------------------------------------
 --------------------------------------------------------------
-cd client
+cd ../client
 npx create-react-app .
+npm i axios react-router-dom mobx mobx-react-lite
+npm i react-bootstrap bootstrap
 
+// axios - для отправки запросов на сервер
+// react-router-dom - для постраничной навигации
+// mobx -  state-manager
+// mobx-react-lite - для связки mobx с функциональными компоннетами react
 
+npm start
 
 
 https://web.postman.co  - API-client, кот-й позволяет отправлять запросы на сервер
