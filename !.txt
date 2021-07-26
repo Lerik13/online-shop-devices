@@ -1,3 +1,4 @@
+
 https://github.com/h5bp/Front-end-Developer-Interview-Questions#js-questions
 
 React & Node.js ИНТЕРНЕТ МАГАЗИН С НУЛЯ. PERN stack PostgreSQL + express + React js + node.js
@@ -26,13 +27,14 @@ npm i -D nodemon
 npm run dev
 npm i express-fileupload
 npm i uuid
+npm i jsonwebtoken bcrypt
 --------------------
 package.json
 "scripts": {
     "dev": "nodemon index.js"
   },
 
-// express - постороение каркаса с помю Router
+// express - постороение каркаса с пом-ю Router
 // pg - BD PostgreSQL
 // pg-hstore -
 // sequelize -  ORM - Технология для связывания программного кода с БД
@@ -41,7 +43,8 @@ package.json
 // nodemon - перезапуск сервера автоматически
 // express-fileupload - для загрузки/сохр-я картинки на сервер
 // uuid - генерация уникального идентификатора ID
-
+// jsonwebtoken - генерация JWT - token-a
+// bcrypt - для хеширования паролей и не хранить их в БД в открытом виде
 
 -------------------------------------------------------------
 download PostgreSQL
@@ -49,8 +52,22 @@ password for db superuser (postgres): qazqwe
 port: 5432
 use pgAdmin
 --------------------------------------------------------------
+--------------------------------------------------------------
+cd client
+npx create-react-app .
 
-web.postman.co  - API-client, кот-й позволяет отправлять запросы на сервер
+
+
+
+https://web.postman.co  - API-client, кот-й позволяет отправлять запросы на сервер
+https://jwt.io/ - JSON Web Token - get more info
 --------------------------------------------------------
 
 static function in class можно выхывать без создания объекта
+
+
+See more:
+1) Middleware
+2) JWT Token
+3) авторизация на Node.js
+
