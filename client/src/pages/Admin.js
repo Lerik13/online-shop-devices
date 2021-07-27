@@ -8,4 +8,4 @@ const Admin = () => {
 	);
 };
 
-export default Admin;Admin Page
+export default Admin;
