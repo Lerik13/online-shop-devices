@@ -17,13 +17,13 @@ export default class DeviceStore {
 			{id: 6, name: 'Blackberry'},
 		]
 		this._devices = [
-			{id: 1, name: 'Iphone 12 pro', rating: 5, img: ''},
-			{id: 2, name: 'Iphone 10 pro', rating: 5, img: ''},
-			{id: 3, name: 'Iphone 11 pro', rating: 5, img: ''},
-			{id: 4, name: 'Iphone X', rating: 5, img: ''},
-			{id: 2, name: 'Iphone 10 pro', rating: 5, img: ''},
-			{id: 3, name: 'Iphone 11 pro', rating: 5, img: ''},
-			{id: 4, name: 'Iphone X', rating: 5, img: ''},
+			{id: 1, name: 'Iphone 12 pro', rating: 5, img: '', price: 1500},
+			{id: 2, name: 'Iphone 10 pro', rating: 5, img: '', price: 2500},
+			{id: 3, name: 'Iphone 11 pro', rating: 5, img: '', price: 3500},
+			{id: 4, name: 'Iphone X', rating: 5, img: '', price: 1500},
+			{id: 5, name: 'Iphone 10 pro', rating: 5, img: '', price: 15000},
+			{id: 6, name: 'Iphone 11 pro', rating: 5, img: '', price: 15000},
+			{id: 7, name: 'Iphone X', rating: 5, img: '', price: 15000},
 		]
 		this._selectedType = {}
 		this._selectedBrand = {}
