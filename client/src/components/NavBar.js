@@ -12,10 +12,15 @@ const NavBar = observer(() => {
 	const {user} = useContext(Context)
 	const history = useHistory();
 
+	const logOut =() => {
+		user.setUser({})
+		user.setIsAuth(false)
+	}
+
 	return (
 		<Navbar bg="dark" variant="dark">
 			<Container>
-			<NavLink style={{color: 'white'}} to={SHOP_ROUTE}>Buy device</NavLink>
+			<NavLink style={{color: 'white'}} to={SHOP_ROUTE}>Buy Device</NavLink>
 			{user.isAuth ?
 				<Nav style={{marginLeft: 'auto', color: 'white'}}>
 					<Button 
@@ -27,14 +32,14 @@ const NavBar = observer(() => {
 					<Button 
 						variant={"outline-light"}
 						style={{marginLeft: '20px'}}
-						onClick={() => history.push(LOGIN_ROUTE)}
+						onClick={() => logOut()}
 					>
 						Log out
 					</Button>
 				</Nav>
 				:
 				<Nav style={{marginLeft: 'auto', color: 'white'}}>
-					<Button variant={"outline-light"} onClick={() => user.setIsAuth(true)}>Autorization</Button>
+					<Button variant={"outline-light"} onClick={() => history.push(LOGIN_ROUTE)}>Autorization</Button>
 				</Nav>
 			}
 			</Container>
