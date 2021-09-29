@@ -13,12 +13,10 @@ const App = observer(() => {
 	const [loading, setLoading] = useState(true)
 	// function will implement only 1 time if array (2nd parameter) is empty
 	useEffect(() => {
-		setTimeout(() => {
-			check().then(data => {
-				user.setUser(true)
-				user.setIsAuth(true)
-			}).finally(() => setLoading(false))
-		}, 1000)
+		check().then(data => {
+			user.setUser(true)
+			user.setIsAuth(true)
+		}).finally(() => setLoading(false))
 	}, [])
 
 	if (loading) {
