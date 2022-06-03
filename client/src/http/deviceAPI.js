@@ -1,8 +1,12 @@
 import { $authHost, $host } from "./index";
 
 export const createType = async (type) => {
-	const {data} = await $authHost.post('api/type', type)
-	return data
+	try {
+		const {data} = await $authHost.post('api/type', type)
+		return data
+	} catch (e) {
+		return new Error(e.response.data.message)
+	}
 }
 
 export const fetchTypes = async () => {
@@ -11,8 +15,12 @@ export const fetchTypes = async () => {
 }
 
 export const createBrand = async (brand) => {
-	const {data} = await $authHost.post('api/brand', brand)
-	return data
+	try {
+		const {data} = await $authHost.post('api/brand', brand)
+		return data
+	} catch (e) {
+		return new Error(e.response.data.message)
+	}
 }
 
 export const fetchBrands = async () => {
@@ -21,8 +29,12 @@ export const fetchBrands = async () => {
 }
 
 export const createDevice = async (device) => {
-	const {data} = await $authHost.post('api/device', device)
-	return data
+	try {
+		const {data} = await $authHost.post('api/device', device)
+		return data
+	} catch (e) {
+		return new Error(e.response.data.message)
+	}
 }
 
 export const fetchDevices = async (typeId, brandId, page, limit=5) => {

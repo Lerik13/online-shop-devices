@@ -14,7 +14,7 @@ module.exports = function(role) {
 			if (decoded.role !== role){
 				res.status(401).json({message: "No access!"})
 			}
-			req.user = decoded // data about token is accesible in any function
+			req.user = decoded // data about token is accessible in any function
 			next()
 		} catch(e) {
 			res.status(401).json({message: "Not authorized"})

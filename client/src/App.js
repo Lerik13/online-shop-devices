@@ -6,7 +6,8 @@ import {observer} from "mobx-react-lite";
 import {Context} from './index';
 import {check} from './http/userAPI';
 import { Spinner } from 'react-bootstrap';
-
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = observer(() => {
 	const {user} = useContext(Context)
@@ -14,20 +15,24 @@ const App = observer(() => {
 	// function will implement only 1 time if array (2nd parameter) is empty
 	useEffect(() => {
 		check().then(data => {
-			user.setUser(true)
+			user.setUser(data)
 			user.setIsAuth(true)
 		}).finally(() => setLoading(false))
-	}, [])
+	}, [user])
 
 	if (loading) {
 		return <Spinner animation={"grow"} />
 	}
 
 	return (
-		<BrowserRouter>
-			<NavBar />
-			<AppRouter />
-		</BrowserRouter>
+		<>
+			<BrowserRouter>
+				<NavBar />
+				<AppRouter />
+			</BrowserRouter>
+
+			<ToastContainer />
+		</>
 	);
 });
 

@@ -5,6 +5,7 @@ import { NavLink, useLocation, useHistory } from 'react-router-dom';
 import { login, registration } from '../http/userAPI';
 import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from '../utils/consts';
 import {Context} from '../index';
+import {toast} from 'react-toastify'
 
 const Auth = observer(() => {
 	const {user} = useContext(Context)
@@ -23,11 +24,11 @@ const Auth = observer(() => {
 				data = await registration(email, password);
 				//console.log(response);
 			}
-			user.setUser(user)
+			user.setUser(data)
 			user.setIsAuth(true)
 			history.push(SHOP_ROUTE)
 		} catch(e) {
-			alert(e.response.data.message)
+			toast.error(e.response.data.message)
 		}
 	}
 

@@ -8,7 +8,7 @@ const Admin = () => {
 	const [brandVisible, setBrandVisible] = useState(false)
 	const [typeVisible, setTypeVisible] = useState(false)
 	const [deviceVisible, setDeviceVisible] = useState(false)
-
+	
 	return (
 		<Container className="d-flex flex-column align-items-center justify-content-center">
 			<Button 

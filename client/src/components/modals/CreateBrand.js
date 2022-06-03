@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { createBrand } from '../../http/deviceAPI';
+import {toast} from 'react-toastify'
 
 const CreateBrand = ({show, onHide}) => {
 	const [value, setValue] = useState('')
+
 	const addBrand = () => {
-		createBrand({name: value}).then(data => {
-			setValue('')
-			onHide() 
+		createBrand({name: value.trim()}).then(data => {
+			if (data instanceof Error) {
+				toast.error(data.message)
+			} else {
+				setValue('')
+				onHide()
+				toast.success("Brand was successfully created")
+			}
 		})
 	}
 

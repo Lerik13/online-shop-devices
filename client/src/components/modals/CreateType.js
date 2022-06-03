@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { createType } from '../../http/deviceAPI';
+import {toast} from 'react-toastify'
 
 const CreateType = ({show, onHide}) => {
 	const [value, setValue] = useState('')
+
 	const addType = () => {
-		createType({name: value}).then(data => {
-			setValue('')
-			onHide() 
+		createType({name: value.trim()}).then(data => {
+			if (data instanceof Error) {
+				toast.error(data.message)
+			} else {
+				setValue('')
+				onHide()
+				toast.success("Type was successfully created")
+			}
 		})
 	}
 

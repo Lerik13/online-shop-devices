@@ -7,19 +7,34 @@ class DeviceController {
 	async create(req, res, next) {
 		try {
 			const {name, price, brandId, typeId, info} = req.body
+			if (!name) {
+				return next(ApiError.badRequest('Name of device is not defined'))
+			}
+			if (!brandId || brandId === 'undefined') {
+				return next(ApiError.badRequest('Brand of device is not defined'))
+			}
+			if (!typeId || typeId === 'undefined') {
+				return next(ApiError.badRequest('Type of device is not defined'))
+			}
+
+			if (!req.files) {
+				return next(ApiError.badRequest('Image file is not defined'))
+			}
 			const {img} = req.files
 			let fileName = uuid.v4() + ".jpg"
 			img.mv(path.resolve(__dirname, '..', 'static', fileName))
 			const device = await Device.create({ name, price, brandId, typeId, img: fileName })
 
 			if (info) {
-				info = JSON.parse(info)
-				info.forEach(i => 
-					DeviceInfo.create({
-						title: i.title,
-						description: i.description,
-						deviceId: device.id
-					})
+				const info_array = JSON.parse(info)
+				info_array.forEach(i => {
+					if (i.title && i.description) {
+						DeviceInfo.create({ 
+							title: i.title,
+							description: i.description,
+							deviceId: device.id
+						})
+					}}
 				)
 			}
 			

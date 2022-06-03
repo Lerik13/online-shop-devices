@@ -10,18 +10,19 @@ import Pages from '../components/Pages';
 
 const Shop = observer(() => {
 	const {device} = useContext(Context)
+	const limit = 3 // show 3 devices per page
 
 	useEffect(() => {
 		fetchTypes().then(data => device.setTypes(data))
 		fetchBrands().then(data => device.setBrands(data))
-		fetchDevices(null, null, 1, 3).then(data => {
+		fetchDevices(null, null, 1, limit).then(data => {
 			device.setDevices(data.rows)
 			device.setTotalCount(data.count)
 		})
 	}, [])
 
 	useEffect(() => {
-		fetchDevices(device.selectedType.id, device.selectedBrand.id, device.page, 3).then(data => {
+		fetchDevices(device.selectedType.id, device.selectedBrand.id, device.page, limit).then(data => {
 			device.setDevices(data.rows)
 			device.setTotalCount(data.count)
 		})

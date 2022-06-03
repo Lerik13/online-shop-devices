@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Col, Container, Image } from 'react-bootstrap';
+import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
 import bigStar from '../assets/starBig.png';
 import {useParams} from 'react-router-dom';
 import { fetchOneDevice } from '../http/deviceAPI';
@@ -10,11 +10,14 @@ const DevicePage = () => {
 
 	useEffect(() => {
 		fetchOneDevice(id).then(data => setDevice(data))
+		console.log('DevicePage:');
+		console.log(device);
 	}, [])
 
 	return (
 		<Container className="mt-3">
-			<div className="d-flex">
+			{/* <div className="d-flex"> */}
+			<Row>
 				<Col md={4}>
 					<Image width={300} height={300} src={process.env.REACT_APP_API_URL + device.img} />
 				</Col>
@@ -38,7 +41,8 @@ const DevicePage = () => {
 						<Button variant={"outline-dark"}>Add to Cart</Button>
 					</Card>
 				</Col>
-			</div>
+			</Row>
+
 			<div className="d-flex flex-column mt-3">
 				<h1>Features</h1>
 				{device.info.map((info, index) => 

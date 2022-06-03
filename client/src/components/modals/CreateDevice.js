@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { Button, Col, Dropdown, Form, Modal, Row } from 'react-bootstrap';
 import { createDevice, fetchBrands, fetchTypes } from '../../http/deviceAPI';
 import { Context } from '../../index';
+import {toast} from 'react-toastify'
 
 const CreateDevice = observer(({show, onHide}) => {
 	const {device} = useContext(Context);
@@ -31,15 +32,25 @@ const CreateDevice = observer(({show, onHide}) => {
 	}
 
 	const addDevice = () => {
+		console.log('%%%%%%%%%%%%%');
+		console.log(device.selectedBrand.id);
+
 		const formData = new FormData()
-		formData.append('name', name)
+		formData.append('name', name.trim())
 		formData.append('price', `${price}`)
 		formData.append('img', file)
 		formData.append('brandId', device.selectedBrand.id)
 		formData.append('typeId', device.selectedType.id)
 		formData.append('info', JSON.stringify(info))
 		createDevice(formData).then(data => {
-			onHide()
+			if (data instanceof Error) {
+				toast.error(data.message)
+			} else {
+				setName('')
+				setPrice(0)
+				onHide()
+				toast.success("Device was successfully created")
+			}
 		})
 	}
 

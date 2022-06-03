@@ -5,26 +5,26 @@ const models = require('./models/models')
 const cors = require('cors')
 const fileUpload = require('express-fileupload')
 const router = require('./routes/index')
-const ErrorHandler = require('./middleware/ErrorHandlingMiddleware')
+const errorHandler = require('./middleware/ErrorHandlingMiddleware')
 const path = require('path')
 
 const PORT = process.env.PORT || 5000
 
 const app = express()
-app.use(cors())
-app.use(express.json()) // чтобы приложение могло парсить JSON формат
+app.use(cors()) 		// to send requests from browser
+app.use(express.json()) // app could parse JSON format
 app.use(express.static(path.resolve(__dirname, 'static'))) // for access static files like imgs
 app.use(fileUpload({}))
 app.use('/api', router)
 
-// Обработка ошибок, последний Middleware
-app.use(ErrorHandler)
+// Error Handling = the last Middleware
+app.use(errorHandler)
 
 const start = async () => {
 	try {
-		// подключение к базе данных
+		// connect to database
 		await sequelize.authenticate()
-		// сверяет состояние базы данных со схемой данных
+		// Verify Database State with Data Schema
 		await sequelize.sync()
 		app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
 	} catch (e) {
