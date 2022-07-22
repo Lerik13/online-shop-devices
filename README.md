@@ -5,6 +5,7 @@ test user: user@user.com, password: user123
 admin: admin@admin.ca, password: admin123
 ```
 using stack of technologies: PERN: PostgreSQL + express + React js + Node.js
+
 using 2 types of JWT: access-token(live 30 mins) + refresh-token (save in cookie and live longer: 30 days, use it if acces-token is expired in user's browser)
 
 State-management: MobX
