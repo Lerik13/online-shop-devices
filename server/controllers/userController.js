@@ -1,53 +1,50 @@
+const { validationResult } = require('express-validator')
 const ApiError = require('../error/ApiError')
-//const bcrypt = require('bcrypt')
-//const jwt = require('jsonwebtoken')
-const {User, Basket} = require('../models/models')
+const {Basket} = require('../models/models')
 const userService = require('../service/userService')
-/*
-const generateJwt = (id, email, role) => {
-	return jwt.sign(
-		{id, email, role}, 
-		process.env.JWT_ACCESS_SECRET,
-		{expiresIn: '24h'}
-	)
-}
-*/
+
 class UserController {
 	async registration(req, res, next) {
 		try {
-			const {email, password, role} = req.body
-			
-			if (!email || !password) {
-				return next(ApiError.badRequest('Non-correct email or password'))
+			const errors = validationResult(req)
+			if (!errors.isEmpty()) {
+				return next(ApiError.badRequest('Validation error', errors.array()))
 			}
+
+			const {email, password, role} = req.body
 
 			const userData = await userService.registration(email, password, role)
-			console.log('!!! registration !!!');
+			
 			// save Refresh-token in cookie 30 days
 			res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true}) // for hhtps add flag 'secure: true'
+			
+			const basket = await Basket.create({userId: userData.user.id})
 
 			return res.json(userData)
-			/*const {email, password, role} = req.body
-			if (!email || !password) {
-				return next(ApiError.badRequest('Non-correct email or password'))
-			}
-			const candidate = await User.findOne({where: {email}})
-			if (candidate) {
-				return next(ApiError.badRequest('User with this email is already existed'))
-			}
-			const hashPassword = await bcrypt.hash(password, 5)
-			const user = await User.create({email, role, password: hashPassword})
-			const basket = await Basket.create({userId: user.id})
-			const token = generateJwt(user.id, user.email, user.role)
-			return res.json({token})*/
 		} catch (e) {
-			console.log(e);
-			return next(ApiError.badRequest(e))
+			next(e)
+		}
+	}
+
+	async activate(req, res, next) { 
+		try {
+			const activationLink = req.params.link
+			await userService.activate(activationLink)
+			// redirect to client url
+			return res.redirect(process.env.CLIENT_URL)
+			return
+		} catch (e) {
+			next(e)
 		}
 	}
 
 	async login(req, res, next) {
-		/*console.log('1111111111111 ------- Login');
+		try {
+			
+		} catch (e) {
+			next(e)
+		}
+		/*
 		const {email, password} = req.body
 		const user = await User.findOne({where: {email}})
 		if (!user) {
@@ -65,21 +62,18 @@ class UserController {
 	async check(req, res, next) {
 		/*const token = generateJwt(req.user.id, req.user.email, req.user.role)
 		return res.json({token})*/
+		try {
+			
+		} catch (e) {
+			next(e)
+		}
 	}
 
 	async logout(req, res, next) { // delete token from DB
 		try {
 			
 		} catch (e) {
-			
-		}
-	}
-
-	async activate(req, res, next) { 
-		try {
-			
-		} catch (e) {
-			
+			next(e)
 		}
 	}
 
@@ -87,7 +81,7 @@ class UserController {
 		try {
 			
 		} catch (e) {
-			
+			next(e)
 		}
 	}
 
@@ -95,7 +89,7 @@ class UserController {
 		try {
 			res.json(['123', '456'])
 		} catch (e) {
-			
+			next(e)
 		}
 	}
 	

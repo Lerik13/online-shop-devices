@@ -1,7 +1,7 @@
 const Router = require('express')
 const router = new Router()
 const basketController = require('../controllers/basketController')
-const authMiddleware = require('../middleware/authMiddleware')
+const authMiddleware = require('../middlewares/authMiddleware')
 //const checkUser = require('../middleware/checkUserMiddleware')
 
 //router.post('/', checkUser('USER'), basketController.create)

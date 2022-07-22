@@ -2,7 +2,6 @@ const nodemailer = require('nodemailer')
 
 class MailService {
 	constructor() {
-		console.log('111');
 		this.transporter = nodemailer.createTransport({
 			host: process.env.SMTP_HOST,
 			service: "Gmail",
@@ -13,12 +12,9 @@ class MailService {
 				pass: process.env.SMTP_PASSWORD,
 			}
 		})
-		console.log('222 nodemailer:');
-		console.log(nodemailer);
 	}
 
 	async sendActivationMail(to, link) {
-		console.log('333');
 		await this.transporter.sendMail({
 			from: process.env.SMTP_USER,
 			to,
@@ -27,12 +23,11 @@ class MailService {
 			html:
 				`
 					<div>
-						<h1>For activation please use this link: </h1>
+						<h1>For activation Device-Store account please use this link: </h1>
 						<a href="${link}">${link}</a>
 					</div>
 				`
 		})
-		console.log('444');
 	}
 }
 
