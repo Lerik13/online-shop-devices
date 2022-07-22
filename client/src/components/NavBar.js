@@ -2,17 +2,18 @@ import React, { useContext } from 'react';
 import { Context } from '../index';
 import { NavLink, useHistory } from 'react-router-dom';
 import {observer} from 'mobx-react-lite';
-import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../utils/consts';
+import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE, BASKET_ROUTE } from '../utils/consts';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import {Button, Container} from 'react-bootstrap';
+import {Button, Container, Image} from 'react-bootstrap';
+import shoppingCart from '../assets/shoppingCart.svg';
 
 const NavBar = observer(() => {
 	const {user} = useContext(Context)
 	const history = useHistory();
 	//console.log(user);
 
-	const logOut =() => {
+	const logOut = () => {
 		user.setUser({})
 		user.setIsAuth(false)
 		localStorage.removeItem('token')
@@ -33,6 +34,16 @@ const NavBar = observer(() => {
 								Admin panel
 							</Button>
 						}
+
+						<Button 
+							variant={"outline"}
+							style={{position: "relative"}}
+							onClick={() => history.push(BASKET_ROUTE)}
+						>
+							<Image width={28} height={28} src={shoppingCart} />
+							<span style={{color: "#0d6efd", position: "absolute", top: "-9px", left: "23px"}}>{user.qtyInBasket}</span>
+						</Button>
+
 						<Button 
 							variant={"outline-light"}
 							style={{marginLeft: '20px'}}

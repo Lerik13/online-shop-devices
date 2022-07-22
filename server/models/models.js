@@ -8,6 +8,13 @@ const User = sequelize.define('user', {
 	email: {type: DataTypes.STRING, unique: true,},
 	password: {type: DataTypes.STRING},
 	role: {type: DataTypes.STRING, defaultValue: "USER"},
+	isActivated: {type: DataTypes.BOOLEAN, defaultValue: false},
+	activationLink: {type: DataTypes.STRING}
+})
+
+// Advanced JWT Autorization: if ACCESS-token is not exist in browser => check REFRESH-token
+const Token = sequelize.define('token', {
+	refreshToken: {type: DataTypes.STRING},
 })
 
 const Basket = sequelize.define('basket', {
@@ -16,6 +23,7 @@ const Basket = sequelize.define('basket', {
 
 const BasketDevice = sequelize.define('basket_device', {
 	id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+	qty: {type: DataTypes.INTEGER, defaultValue: 1},
 })
 
 const Device = sequelize.define('device', {
@@ -52,6 +60,9 @@ const TypeBrand = sequelize.define('type_brand', {
 })
 
 
+User.hasOne(Token)
+Token.belongsTo(User)
+
 User.hasOne(Basket)
 Basket.belongsTo(User)
 
@@ -81,6 +92,7 @@ Brand.belongsToMany(Type, {through: TypeBrand })
 
 module.exports = {
 	User,
+	Token,
 	Basket,
 	BasketDevice,
 	Device,

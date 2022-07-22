@@ -1,18 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
 import bigStar from '../assets/starBig.png';
 import {useParams} from 'react-router-dom';
 import { fetchOneDevice } from '../http/deviceAPI';
+import { addToBasket } from '../http/userAPI';
+import {Context} from '../index';
 
 const DevicePage = () => {
+	const {user} = useContext(Context)
 	const [device, setDevice] = useState({info: []});
 	const {id} = useParams();
 
 	useEffect(() => {
 		fetchOneDevice(id).then(data => setDevice(data))
-		console.log('DevicePage:');
-		console.log(device);
 	}, [])
+
+	const addToCart = () => {
+		addToBasket(id).then(
+			user.setQtyInBasket(Number(user.qtyInBasket) + 1)
+		)
+	}
 
 	return (
 		<Container className="mt-3">
@@ -38,7 +45,7 @@ const DevicePage = () => {
 						style={{width:300, height:300, fontSize:32, border: '5px solid lightgray'}}
 					>
 						<h3>from: ${device.price}</h3>
-						<Button variant={"outline-dark"}>Add to Cart</Button>
+						<Button variant={"outline-dark"} onClick={() => addToCart()}>Add to Cart</Button>
 					</Card>
 				</Col>
 			</Row>

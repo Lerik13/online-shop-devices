@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import {observer} from 'mobx-react-lite';
 import { Button, Card, Container, Form } from 'react-bootstrap';
 import { NavLink, useLocation, useHistory } from 'react-router-dom';
-import { login, registration } from '../http/userAPI';
+import { login, registration, qtyInBasket } from '../http/userAPI';
 import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from '../utils/consts';
 import {Context} from '../index';
 import {toast} from 'react-toastify'
@@ -26,6 +26,10 @@ const Auth = observer(() => {
 			}
 			user.setUser(data)
 			user.setIsAuth(true)
+			
+			data = await qtyInBasket()
+			user.setQtyInBasket(data)
+			
 			history.push(SHOP_ROUTE)
 		} catch(e) {
 			toast.error(e.response.data.message)

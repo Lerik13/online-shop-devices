@@ -18,3 +18,19 @@ export const check = async () => {
 	localStorage.setItem('token', data.token)
 	return jwt_decode(data.token)
 }
+
+export const qtyInBasket = async () => {
+	const {data} = await $authHost.get('api/basket/qty')
+	return data.qty
+}
+
+export const addToBasket = async (deviceId, qty) => {
+	const {data} = await $authHost.post('api/basket', {deviceId, qty})
+	console.log(data);
+	return data
+}
+
+export const fetchBasket = async () => {
+	const {data} = await $authHost.get('api/basket')
+	return data
+}

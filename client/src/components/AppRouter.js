@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom'
-import { userRoutes, adminRoutes,publicRoutes } from '../routes';
+import { userRoutes, adminRoutes, publicRoutes } from '../routes';
 import { SHOP_ROUTE } from '../utils/consts';
 import { Context } from '../index';
 

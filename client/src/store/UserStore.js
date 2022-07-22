@@ -4,6 +4,7 @@ export default class UserStore {
 	constructor() {
 		this._isAuth = false
 		this._user = {}
+		this._qtyInBasket = 0
 		makeAutoObservable(this)
 	}
 
@@ -13,6 +14,13 @@ export default class UserStore {
 
 	setUser(user) {
 		this._user = user
+	}
+
+	setQtyInBasket(qty) {
+		if (!qty) {
+			this._qtyInBasket = 0
+		}
+		this._qtyInBasket = qty
 	}
 
 	get isAuth(){
@@ -27,4 +35,10 @@ export default class UserStore {
 	get user() {
 		return this._user
 	}
+
+	get qtyInBasket() {
+		return this._qtyInBasket
+	}
+
+
 }
