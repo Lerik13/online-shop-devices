@@ -30,7 +30,7 @@ class UserController {
 		try {
 			const activationLink = req.params.link
 			await userService.activate(activationLink)
-			// redirect to client url
+			// redirect to Client url
 			return res.redirect(process.env.CLIENT_URL)
 			return
 		} catch (e) {
@@ -40,23 +40,13 @@ class UserController {
 
 	async login(req, res, next) {
 		try {
-			
+			const {email, password} = req.body
+			const userData = await userService.login(email, password)
+			res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true}) // for hhtps add flag 'secure: true'
+			return res.json(userData)
 		} catch (e) {
 			next(e)
 		}
-		/*
-		const {email, password} = req.body
-		const user = await User.findOne({where: {email}})
-		if (!user) {
-			return next(ApiError.internal('User with this email did not find'))
-		}
-		let comparePassword = bcrypt.compareSync(password, user.password)
-		if (!comparePassword) {
-			return next(ApiError.internal('Password is incorrect'))
-		}
-		const token = generateJwt(user.id, user.email, user.role)
-		return res.json({token})*/
-
 	}
 
 	async check(req, res, next) {

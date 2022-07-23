@@ -11,7 +11,7 @@ class UserService {
 		if (!email || !password) {
 			throw ApiError.badRequest('Non-correct email or password')
 		}
-		
+
 		const candidate = await User.findOne({where: {email}})
 		if (candidate) {
 			throw ApiError.badRequest(`User with this email ${email} is already existed`)
@@ -26,10 +26,7 @@ class UserService {
 		const tokens = tokenService.geterateTokens({...userDto})
 		await tokenService.saveToken(userDto.id, tokens.refreshToken)
 
-		return {
-			...tokens,
-			user: userDto
-		}
+		return {...tokens, user: userDto}
 	}
 
 	async activate(activationLink) {
@@ -39,6 +36,24 @@ class UserService {
 		}
 		user.isActivated = true
 		await user.save()
+	}
+
+	async login(email, password) {
+		const user = await User.findOne({where: {email}})
+		if (!user) {
+			throw ApiError.badRequest('User with this email did not find')
+		}
+		const isPathEquals = bcrypt.compareSync(password, user.password) //compare
+		if (!isPathEquals) {
+			throw ApiError.internal('Password is incorrect')
+		}
+
+		const userDto = new UserDto(user)
+
+		const tokens = tokenService.geterateTokens({...userDto})
+		await tokenService.saveToken(userDto.id, tokens.refreshToken)
+
+		return {...tokens, user: userDto}
 	}
 }
 
