@@ -15,6 +15,6 @@ router.get('/auth', authMiddleware, userController.check)
 router.post('/logout', userController.logout)
 router.get('/activate/:link', userController.activate)
 router.get('/refresh', userController.refresh)
-router.get('/users', userController.getUsers) //test end-point -- available only for authorized user
+router.get('/users', authMiddleware, userController.getUsers) //test end-point -- available only for authorized user
 
 module.exports = router
