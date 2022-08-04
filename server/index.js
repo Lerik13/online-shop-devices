@@ -13,9 +13,12 @@ const PORT = process.env.PORT || 5000
 
 const app = express()
 
-app.use(cors()) 		// to send requests from browser
 app.use(express.json()) // app could parse JSON format
 app.use(cookieParser())
+app.use(cors({ // to send requests from browser
+	credentials: true, // allow include cookie
+	origin: process.env.CLIENT_URL
+}))
 app.use(express.static(path.resolve(__dirname, 'static'))) // for access static files like imgs
 app.use(fileUpload({}))
 app.use('/api', router)

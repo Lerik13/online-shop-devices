@@ -48,17 +48,17 @@ class UserController {
 			next(e)
 		}
 	}
-
+/*
 	async check(req, res, next) {
-		/*const token = generateJwt(req.user.id, req.user.email, req.user.role)
-		return res.json({token})*/
+		//const token = generateJwt(req.user.id, req.user.email, req.user.role)
+		//return res.json({token})
 		try {
 			
 		} catch (e) {
 			next(e)
 		}
 	}
-
+*/
 	async logout(req, res, next) { // delete refresh-token from DB and clear cookie
 		try {
 			const {refreshToken} = req.cookies

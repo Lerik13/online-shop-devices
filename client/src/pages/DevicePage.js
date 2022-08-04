@@ -5,6 +5,7 @@ import {useParams} from 'react-router-dom';
 import { fetchOneDevice } from '../http/deviceAPI';
 import { addToBasket } from '../http/userAPI';
 import {Context} from '../index';
+import { SERVER_URL } from '../http';
 
 const DevicePage = () => {
 	const {user} = useContext(Context)
@@ -17,16 +18,15 @@ const DevicePage = () => {
 
 	const addToCart = () => {
 		addToBasket(id).then(
-			user.setQtyInBasket(Number(user.qtyInBasket) + 1)
+			user.addOneQtyInBasket()
 		)
 	}
 
 	return (
 		<Container className="mt-3">
-			{/* <div className="d-flex"> */}
 			<Row>
 				<Col md={4}>
-					<Image width={300} height={300} src={process.env.REACT_APP_API_URL + device.img} />
+					<Image width={300} height={300} src={SERVER_URL +'/'+ device.img} />
 				</Col>
 				<Col md={4}>
 					<div className="d-flex flex-column align-items-center">

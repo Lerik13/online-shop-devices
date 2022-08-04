@@ -3,6 +3,7 @@ const uuid = require('uuid')
 const {User} = require('../models/models')
 const mailService = require('./mailService')
 const tokenService = require('./tokenService')
+const basketService = require('./basketService')
 const UserDto = require('../dtos/user-dto')
 const ApiError = require('../error/ApiError')
 
@@ -32,7 +33,7 @@ class UserService {
 	async activate(activationLink) {
 		const user = await User.findOne({where: {activationLink}})
 		if (!user) {
-			throw ApiError.badRequest('Uncorrect link for activation')
+			throw ApiError.badRequest('Incorrect link for activation')
 		}
 		user.isActivated = true
 		await user.save()
@@ -48,7 +49,14 @@ class UserService {
 			throw ApiError.internal('Password is incorrect')
 		}
 
+		if (!user.isActivated) {
+			throw ApiError.internal('Check email to activate your account')
+		}
+
 		const userDto = new UserDto(user)
+		const qtyInBasket = Number(await basketService.getQtyInBasket(userDto.id))
+
+		userDto.setQtyInBasket(qtyInBasket)
 
 		const tokens = tokenService.geterateTokens({...userDto})
 		await tokenService.saveToken(userDto.id, tokens.refreshToken)
@@ -74,6 +82,10 @@ class UserService {
 		const user = await User.findOne({where: {id: userData.id}})
 		const userDto = new UserDto(user)
 
+		const qtyInBasket = Number(await basketService.getQtyInBasket(userDto.id))
+		
+				userDto.setQtyInBasket(qtyInBasket)
+		
 		const tokens = tokenService.geterateTokens({...userDto})
 		await tokenService.saveToken(userDto.id, tokens.refreshToken)
 

@@ -22,8 +22,6 @@ class TypeController {
 
 	async delete(req, res) {
 		const {id} = req.params
-		console.log('Delete type:');
-		console.log(id);
 		if (!id) {
 			return ApiError.badRequest('ID of type is not defined')
 		}

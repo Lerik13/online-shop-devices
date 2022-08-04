@@ -5,12 +5,13 @@ import BrandBar from '../components/BrandBar';
 import DeviceList from '../components/DeviceList';
 import { observer } from 'mobx-react-lite';
 import { Context } from '../index';
-import { fetchBrands, fetchDevices, fetchTypes } from '../http/deviceAPI';
+import { fetchTypes, fetchBrands, fetchDevices } from '../http/deviceAPI';
 import Pages from '../components/Pages';
+import { SHOW_DEVICES_PER_PAGE } from '../utils/consts';
 
 const Shop = observer(() => {
 	const {device} = useContext(Context)
-	const limit = 3 // show 3 devices per page
+	const limit = SHOW_DEVICES_PER_PAGE // show 3 devices per page
 
 	useEffect(() => {
 		fetchTypes().then(data => device.setTypes(data))

@@ -32,8 +32,6 @@ const CreateDevice = observer(({show, onHide}) => {
 	}
 
 	const addDevice = () => {
-		console.log('%%%%%%%%%%%%%');
-		console.log(device.selectedBrand.id);
 
 		const formData = new FormData()
 		formData.append('name', name.trim())

@@ -1,26 +1,42 @@
 import {makeAutoObservable} from "mobx";
-
+import AuthService from "../services/AuthService";
+import {toast} from 'react-toastify'
+import axios from 'axios'
+import { API_URL } from "../http";
+import { qtyInBasket } from "../http/userAPI";
 export default class UserStore {
 	constructor() {
-		this._isAuth = false
 		this._user = {}
-		this._qtyInBasket = 0
+		this._isAuth = false
+		this._isLoading = false
 		makeAutoObservable(this)
-	}
-
-	setIsAuth(bool) {
-		this._isAuth = bool
 	}
 
 	setUser(user) {
 		this._user = user
 	}
 
+	setIsAuth(bool) {
+		this._isAuth = bool
+	}
+
+	setLoading(bool) {
+		this._isLoading = bool
+	}
+	
 	setQtyInBasket(qty) {
 		if (!qty) {
-			this._qtyInBasket = 0
+			this._user.qtyInBasket = 0
 		}
-		this._qtyInBasket = qty
+		this._user.qtyInBasket = Number(qty)
+	}
+
+	addOneQtyInBasket() {
+		this._user.qtyInBasket += 1
+	}
+
+	refreshQtyInBasket() {
+		qtyInBasket().then( res => this.setQtyInBasket(res) )
 	}
 
 	get isAuth(){
@@ -37,8 +53,60 @@ export default class UserStore {
 	}
 
 	get qtyInBasket() {
-		return this._qtyInBasket
+		return this._user.qtyInBasket
 	}
 
+	async login(email, password) {
+		try {
+			const response = await AuthService.login(email, password)
+
+			localStorage.setItem('token', response.data.accessToken)
+			this.setIsAuth(true)
+			this.setUser(response.data.user)
+			
+			return true;
+		} catch (e) {
+			toast.error(e.response?.data?.message)
+		}
+	}
+
+	async registration(email, password) {
+		try {
+			const response = await AuthService.registration(email, password)
+
+			localStorage.setItem('token', response.data.accessToken)
+
+			toast.success("Please check your email to complete the registration")
+		} catch (e) {
+			toast.error(e.response?.data?.message)
+		}
+	}
+
+	async logout() {
+		try {
+			const response = await AuthService.logout()
+			
+			localStorage.removeItem('token')
+			this.setIsAuth(false)
+			this.setUser({})
+		} catch (e) {
+			toast.error(e.response?.data?.message)
+		}
+	}
+
+	async checkAuth() {
+		this.setLoading(true)
+		try {
+			const response = await axios.get(`${API_URL}/user/refresh`, {withCredentials: true})
+			
+			localStorage.setItem('token', response.data.accessToken)
+			this.setIsAuth(true)
+			this.setUser(response.data.user)
+		} catch (e) {
+			toast.error(e.response?.data?.message)
+		} finally {
+			this.setLoading(false)
+		}
+	}
 
 }

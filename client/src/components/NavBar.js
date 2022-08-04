@@ -11,12 +11,9 @@ import shoppingCart from '../assets/shoppingCart.svg';
 const NavBar = observer(() => {
 	const {user} = useContext(Context)
 	const history = useHistory();
-	//console.log(user);
 
 	const logOut = () => {
-		user.setUser({})
-		user.setIsAuth(false)
-		localStorage.removeItem('token')
+		user.logout()
 		history.push(SHOP_ROUTE)
 	}
 
@@ -24,8 +21,10 @@ const NavBar = observer(() => {
 		<Navbar bg="dark" variant="dark">
 			<Container>
 				<NavLink style={{color: 'white'}} to={SHOP_ROUTE}>Buy Device</NavLink>
-				{user.isAuth ?
-					<Nav style={{marginLeft: 'auto', color: 'white'}}>
+				<Nav style={{marginLeft: 'auto', color: 'white'}}>
+					{!user.isAuth ?
+						<Button variant={"outline-light"} onClick={() => history.push(LOGIN_ROUTE)}>Autorization</Button>
+					: <>
 						{user.isAdmin && 
 							<Button 
 								variant={"outline-light"} 
@@ -51,12 +50,9 @@ const NavBar = observer(() => {
 						>
 							Log out
 						</Button>
-					</Nav>
-					:
-					<Nav style={{marginLeft: 'auto', color: 'white'}}>
-						<Button variant={"outline-light"} onClick={() => history.push(LOGIN_ROUTE)}>Autorization</Button>
-					</Nav>
-				}
+					</>
+					}
+				</Nav>
 			</Container>
 	  </Navbar>
 	);
