@@ -13,8 +13,11 @@ const AppRouter = () => {
 		if (localStorage.getItem('token')) {
 			user.checkAuth()
 				.then(res => {
+					console.log(user);
 					if (user.isAuth) {
 						if (user.isAdmin){
+							console.log('! Admin !');
+							console.log(adminRoutes);
 							setRoutes(adminRoutes)
 						} else {
 							setRoutes(userRoutes)

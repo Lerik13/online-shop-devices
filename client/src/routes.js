@@ -20,7 +20,7 @@ export const userRoutes = [
 	{
 		path: BASKET_ROUTE,
 		Component: Basket
-	}
+	},
 ]
 
 export const adminRoutes = [
@@ -28,10 +28,6 @@ export const adminRoutes = [
 		path: ADMIN_ROUTE,
 		Component: Admin
 	},
-	{
-		path: BASKET_ROUTE,
-		Component: Basket
-	}
 ]
 
 export const publicRoutes = [

@@ -25,23 +25,23 @@ const NavBar = observer(() => {
 					{!user.isAuth ?
 						<Button variant={"outline-light"} onClick={() => history.push(LOGIN_ROUTE)}>Autorization</Button>
 					: <>
-						{user.isAdmin && 
+						{user.isAdmin ? 
 							<Button 
 								variant={"outline-light"} 
 								onClick={() => history.push(ADMIN_ROUTE)}
 							>
 								Admin panel
 							</Button>
+							:
+							<Button 
+								variant={"outline"}
+								style={{position: "relative"}}
+								onClick={() => history.push(BASKET_ROUTE)}
+							>
+								<Image width={28} height={28} src={shoppingCart} />
+								<span style={{color: "#0d6efd", position: "absolute", top: "-9px", left: "23px"}}>{user.qtyInBasket}</span>
+							</Button>
 						}
-
-						<Button 
-							variant={"outline"}
-							style={{position: "relative"}}
-							onClick={() => history.push(BASKET_ROUTE)}
-						>
-							<Image width={28} height={28} src={shoppingCart} />
-							<span style={{color: "#0d6efd", position: "absolute", top: "-9px", left: "23px"}}>{user.qtyInBasket}</span>
-						</Button>
 
 						<Button 
 							variant={"outline-light"}

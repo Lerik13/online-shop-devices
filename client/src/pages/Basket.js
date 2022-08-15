@@ -10,18 +10,21 @@ import { toast } from 'react-toastify';
 const Basket = observer(() => {
 	const {user} = useContext(Context)	
 	const [devices, setDevices] = useState([]);
+	const [total, setTotal] = useState(0);
 	const [isDataChanged, setIsDataChanged] = useState(false);
 
 	useEffect(() => {
 		fetchBasket().then(data => {
 	
 			const arrDevices = [...data]
+			setTotal(0)
 			setDevices([]);
 
 			arrDevices.map((device, index) => {
 				fetchOneDevice(device.deviceId).then(dataDevice => {
-					arrDevices[index] = {...arrDevices[index], 'name': dataDevice['name'], 'img': dataDevice['img']}
+					arrDevices[index] = {...arrDevices[index], 'name': dataDevice['name'], 'img': dataDevice['img'], 'price': dataDevice['price']}
 					setDevices(arr => [ ...arr, arrDevices[index] ]);
+					setTotal(prev =>  prev + dataDevice['price'] * arrDevices[index]['qty'])
 				})
 			})
 		})
@@ -54,11 +57,19 @@ const Basket = observer(() => {
 						<Col xs={1} className="d-flex align-self-center">
 							{device.qty}
 						</Col>
-						<Col xs={2} className="d-flex align-self-center">
-							<Button variant={"outline-dark"} onClick={() => DeleteFromCart(device.id)}>Delete</Button>
+						<Col xs={1} className="d-flex align-self-center">
+							${device.price * device.qty}
+						</Col>
+						<Col xs={1} className="d-flex align-self-center">
+							<Button variant="outline-danger" onClick={() => DeleteFromCart(device.id)}>X</Button>
 						</Col>
 					</Row>
 				)}
+				<Row className="d-flex" style={{padding:10, fontWeight: 'bold'}}>
+					<Col xs={9} className="d-flex"></Col>
+					<Col xs={1} className="d-flex align-self-center">Total:</Col>
+					<Col xs={1} className="d-flex align-self-center">${total}</Col>
+				</Row>
 			</div>
 		</Container>
 	);

@@ -1,4 +1,4 @@
-/*import React, {useState} from 'react';
+import React, {useState} from 'react';
 import { Button, Container } from 'react-bootstrap';
 import CreateType from '../components/modals/CreateType';
 import CreateBrand from '../components/modals/CreateBrand';
@@ -42,4 +42,4 @@ const Admin = () => {
 	);
 };
 
-export default Admin;*/
+export default Admin;
