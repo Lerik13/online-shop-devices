@@ -15,12 +15,21 @@ DB Schema:<br>
 
 ### Client Functionality
 1. Register User (advanced authorization: send activation link to user's email for activation account)
-2. Login/Logout (Saving JWT-token in user's Local Storage)
-3. Shop page (main-page) - Pagination + Filter by type and brand (by default show all)
+![Registration](https://github.com/Lerik13/online-shop-devices/blob/main/screenshots/0_register.jpg?raw=true "Registration")
+2. Login/Logout (Saving JWT-token in user's Local Storage)<br>
+![Authorization](https://github.com/Lerik13/online-shop-devices/blob/main/screenshots/0_login.jpg?raw=true "Authorization")
+3. Shop page (main-page) - Pagination + Filter by type and brand (by default show all)<br>
+![Catalog_devices](https://github.com/Lerik13/online-shop-devices/blob/main/screenshots/1_shop.jpg?raw=true "Catalog")
 4. Device-info page 
-5. 
-6. Admin panel (for user with role='ADMIN'): Add type, Add brand, Add device
-                                                                    
+  - Rating of device (set authorized user's rating for device + update average rating for device)
+  - Add device to basket<br>
+![Device_info](https://github.com/Lerik13/online-shop-devices/blob/main/screenshots/2_device.jpg?raw=true "Device")
+5. Basket page<br>
+![Basket](https://github.com/Lerik13/online-shop-devices/blob/main/screenshots/3_basket.jpg?raw=true "Basket")
+6. Admin panel (for user with role='ADMIN'): Add type, Add brand, Add device<br>
+![Admin2](https://github.com/Lerik13/online-shop-devices/blob/main/screenshots/5_admin.jpg?raw=true "Admin panel 2")
+![Admin3](https://github.com/Lerik13/online-shop-devices/blob/main/screenshots/6_admin.jpg?raw=true "Admin panel 3")
+
 ### Developing details
 #### Backend libs:
 - express -- Express-framework for creating web-app using NodeJS
