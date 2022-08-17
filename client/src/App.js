@@ -7,6 +7,7 @@ import {Context} from './index';
 import { Spinner } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import './styles.css';
 
 const App = observer(() => {
 	const {user} = useContext(Context)

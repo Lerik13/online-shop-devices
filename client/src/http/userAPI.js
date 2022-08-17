@@ -36,3 +36,21 @@ export const fetchBasket = async () => {
 		toast.error(e.response?.data?.message)
 	}
 }
+
+export const fetchRating = async (deviceId) => {
+	try {
+		const {data} = await $api.get('/rating/'+deviceId)
+		return data.rate
+	} catch (e) {
+		toast.error(e.response?.data?.message)
+	}
+}
+
+export const addRating = async (deviceId, rate) => {
+	try {
+		const {data} = await $api.post('/rating', {deviceId, rate})
+		return data
+	} catch (e) {
+		toast.error(e.response?.data?.message)
+	}
+}

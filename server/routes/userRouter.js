@@ -16,5 +16,5 @@ router.post('/logout', userController.logout)
 router.get('/activate/:link', userController.activate)
 router.get('/refresh', userController.refresh) // Refresh token
 router.get('/users', authMiddleware, userController.getUsers) //test end-point -- available only for authorized user
-
+ 
 module.exports = router

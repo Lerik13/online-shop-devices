@@ -94,7 +94,7 @@ class UserController {
 			next(e)
 		}
 	}
-	
+
 }
 
 module.exports = new UserController()
