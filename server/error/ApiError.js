@@ -3,11 +3,13 @@ class ApiError extends Error {
 		super(message)
 		this.status = status
 		this.errors = errors
-		//this.message = message
 	}
 
 	static unautorizedError() {
 		return new ApiError(401, 'User is unauthorized')
+	}
+	static noaccessError() {
+		return new ApiError(401, 'No access')
 	}
 
 	static badRequest(message, errors = []) {

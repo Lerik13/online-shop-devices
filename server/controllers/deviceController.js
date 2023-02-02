@@ -1,6 +1,6 @@
 const uuid = require('uuid')
 const path = require('path')
-const {Device, DeviceInfo} = require('../models/models')
+const { Device, DeviceInfo, BasketDevice } = require('../models/models')
 const ApiError = require('../error/ApiError')
 
 class DeviceController {
@@ -78,6 +78,31 @@ class DeviceController {
 			}
 		)
 		return res.json(device)
+	}
+
+	async delete(req, res) {
+		const {id} = req.params
+		if (!id) {
+			return ApiError.badRequest('ID of device is not defined')
+		}
+		
+		const device = await Device.findOne({ where: {id} })
+		if (!device) {
+			return ApiError.badRequest('Device with ID is not found')
+		}
+		
+		const basket = await BasketDevice.findOne({ where: {deviceId: id} })
+		if (basket) {
+			return ApiError.badRequest('Sorry, you cannot delete device! As it is found in user`s basket.')
+		}
+
+		try {
+			const devices = await device.destroy(); 
+			return res.json(devices)
+			//return {message: 'Ok'}
+		} catch (e) {
+			return ApiError.badRequest('Error during removing device')
+		}
 	}
 
 }

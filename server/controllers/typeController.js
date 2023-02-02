@@ -1,4 +1,4 @@
-const {Type, Device} = require('../models/models')
+const { Type, Device } = require('../models/models')
 const ApiError = require('../error/ApiError')
 class TypeController {
 	async create(req, res, next) {
@@ -43,7 +43,6 @@ class TypeController {
 		} catch (e) {
 			return ApiError.badRequest('Error during removing type')
 		}
-		
 	}
 }
 

@@ -12,14 +12,10 @@ class UserController {
 			}
 
 			const {email, password, role} = req.body
-
 			const userData = await userService.registration(email, password, role)
-			
 			// save Refresh-token in cookie 30 days
-			res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true}) // for hhtps add flag 'secure: true'
-			
+			res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true}) // for https add flag 'secure: true'
 			const basket = await Basket.create({userId: userData.user.id})
-
 			return res.json(userData)
 		} catch (e) {
 			next(e)
@@ -48,17 +44,7 @@ class UserController {
 			next(e)
 		}
 	}
-/*
-	async check(req, res, next) {
-		//const token = generateJwt(req.user.id, req.user.email, req.user.role)
-		//return res.json({token})
-		try {
-			
-		} catch (e) {
-			next(e)
-		}
-	}
-*/
+
 	async logout(req, res, next) { // delete refresh-token from DB and clear cookie
 		try {
 			const {refreshToken} = req.cookies
