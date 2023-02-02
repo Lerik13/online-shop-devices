@@ -4,7 +4,7 @@ import { deleteFromBasket, fetchBasket } from '../http/userAPI';
 import { fetchOneDevice } from '../http/deviceAPI';
 import { observer } from 'mobx-react-lite';
 import { Button, Col, Container, Image, Row } from 'react-bootstrap';
-import { SERVER_URL } from '../http';
+import { SERVER_URL } from '../config';
 import { toast } from 'react-toastify';
 
 const Basket = observer(() => {

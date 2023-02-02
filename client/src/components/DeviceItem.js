@@ -3,7 +3,7 @@ import { Card, Col, Image } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import star from '../assets/star.png';
 import { DEVICE_ROUTE } from '../utils/consts';
-import { SERVER_URL } from '../http';
+import { SERVER_URL } from '../config';
 
 const DeviceItem = ({device, brandName}) => {
 	const history = useHistory()

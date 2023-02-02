@@ -1,8 +1,6 @@
 import axios from "axios";
 import {toast} from 'react-toastify'
-
-export const SERVER_URL = `http://localhost:5000`
-export const API_URL = `http://localhost:5000/api`
+import { API_URL } from "../config";
 
 const $api = axios.create({
 	withCredentials: true,  // send cookie automaticly with request
@@ -34,26 +32,3 @@ $api.interceptors.response.use((config) => {
 })
 
 export default $api
-/*
-const $host = axios.create({
-	baseURL: process.env.API_URL
-})
-
-const $authHost = axios.create({
-	withCredentials: true,  // use cookie
-	baseURL: process.env.API_URL
-})
-
-// For each request add Header authorization = token
-const authInterceptor = config => {
-	config.headers.authorization = `Bearer ${localStorage.getItem('token')}`
-	return config
-}
-
-$authHost.interceptors.request.use(authInterceptor)
-
-export {
-	$host,
-	$authHost
-}
-*/

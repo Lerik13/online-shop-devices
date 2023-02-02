@@ -5,7 +5,7 @@ import {useParams} from 'react-router-dom';
 import { fetchOneDevice } from '../http/deviceAPI';
 import { addToBasket, fetchRating, addRating } from '../http/userAPI';
 import {Context} from '../index';
-import { SERVER_URL } from '../http';
+import { SERVER_URL } from '../config';
 import StarList from '../components/StarList';
 
 const DevicePage = () => {

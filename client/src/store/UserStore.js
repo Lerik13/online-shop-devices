@@ -2,7 +2,7 @@ import {makeAutoObservable} from "mobx";
 import AuthService from "../services/AuthService";
 import {toast} from 'react-toastify'
 import axios from 'axios'
-import { API_URL } from "../http";
+import { API_URL } from "../config";
 import { qtyInBasket } from "../http/userAPI";
 export default class UserStore {
 	constructor() {
