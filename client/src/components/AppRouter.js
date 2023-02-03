@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import {Switch, Route, Redirect} from 'react-router-dom'
+import {Routes, Route, Navigate} from 'react-router-dom'
 import { userRoutes, adminRoutes, publicRoutes } from '../routes';
 import { SHOP_ROUTE } from '../utils/consts';
 import { Context } from '../index';
@@ -13,11 +13,11 @@ const AppRouter = () => {
 		if (localStorage.getItem('token')) {
 			user.checkAuth()
 				.then(res => {
-					console.log(user);
+					//console.log(user);
 					if (user.isAuth) {
 						if (user.isAdmin){
 							console.log('! Admin !');
-							console.log(adminRoutes);
+							//console.log(adminRoutes);
 							setRoutes(adminRoutes)
 						} else {
 							setRoutes(userRoutes)
@@ -27,18 +27,17 @@ const AppRouter = () => {
 		}
 	}, [user])
 	
-
 	return (
-		<Switch>
+		<Routes>
 			{routes.map(({path, Component}) => 
-				<Route key={path} path={path} component={Component} exact />
+				<Route key={path} path={path} element={<Component />} />
 			)}
-
+		
 			{publicRoutes.map(({path, Component}) => 
-				<Route key={path} path={path} component={Component} exact />
+				<Route key={path} path={path} element={<Component />} />
 			)}
-			<Redirect to={SHOP_ROUTE} />
-		</Switch>
+			<Route path="*" element={<Navigate to={SHOP_ROUTE} />} />
+		</Routes>
 	);
 };
 

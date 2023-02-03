@@ -1,15 +1,15 @@
 import React from 'react';
 import { Card, Col, Image } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import star from '../assets/star.png';
 import { DEVICE_ROUTE } from '../utils/consts';
 import { SERVER_URL } from '../config';
 
 const DeviceItem = ({device, brandName}) => {
-	const history = useHistory()
+	const navigate = useNavigate()
 
 	return (
-		<Col md={3} className={"mt-3"} onClick={() => history.push(DEVICE_ROUTE + '/' + device.id)}>
+		<Col md={3} className={"mt-3"} onClick={() => navigate(DEVICE_ROUTE + '/' + device.id)}>
 			<Card
 				style={{width: 150, cursor: 'pointer'}}
 				border={"light"}

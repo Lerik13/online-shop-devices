@@ -16,7 +16,7 @@ class TypeController {
 	}
 
 	async getAll(req, res) {
-		const types = await Type.findAll()
+		const types = await Type.findAll({ order: [['name', 'ASC']] })
 		return res.json(types)
 	}
 

@@ -1,14 +1,14 @@
 import React, { useContext, useState } from 'react';
 import {observer} from 'mobx-react-lite';
 import { Button, Card, Container, Form } from 'react-bootstrap';
-import { NavLink, useLocation, useHistory } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from '../utils/consts';
 import {Context} from '../index';
 
 const Auth = observer(() => {
 	const {user} = useContext(Context)
 	const location = useLocation() // hook for getting path in path string
-	const history = useHistory()
+	const navigate = useNavigate()
 	const isLogin = location.pathname === LOGIN_ROUTE
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
@@ -19,7 +19,7 @@ const Auth = observer(() => {
 			user.login(email, password)
 				.then(res => {
 					if (res) {
-						history.push(SHOP_ROUTE)
+						navigate(SHOP_ROUTE)
 					}
 				})
 		} else {

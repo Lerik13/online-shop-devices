@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Context } from '../index';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import {observer} from 'mobx-react-lite';
 import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE, BASKET_ROUTE } from '../utils/consts';
 import Navbar from 'react-bootstrap/Navbar';
@@ -10,25 +10,27 @@ import shoppingCart from '../assets/shoppingCart.svg';
 
 const NavBar = observer(() => {
 	const {user} = useContext(Context)
-	const history = useHistory();
+	const navigate = useNavigate();
 
 	const logOut = () => {
 		user.logout()
-		history.push(SHOP_ROUTE)
+		navigate(SHOP_ROUTE)
 	}
 
 	return (
 		<Navbar bg="dark" variant="dark">
 			<Container>
-				<NavLink style={{color: 'white'}} to={SHOP_ROUTE}>Buy Device</NavLink>
+				<NavLink style={{color: 'white'}} to={SHOP_ROUTE}>Device Store</NavLink>
 				<Nav style={{marginLeft: 'auto', color: 'white'}}>
 					{!user.isAuth ?
-						<Button variant={"outline-light"} onClick={() => history.push(LOGIN_ROUTE)}>Autorization</Button>
+						<Button variant={"outline-light"} onClick={() => navigate(LOGIN_ROUTE)}>
+							Autorization
+						</Button>
 					: <>
 						{user.isAdmin ? 
-							<Button 
-								variant={"outline-light"} 
-								onClick={() => history.push(ADMIN_ROUTE)}
+							<Button
+								variant={"outline-light"}
+								onClick={() => navigate(ADMIN_ROUTE)}
 							>
 								Admin panel
 							</Button>
@@ -36,7 +38,7 @@ const NavBar = observer(() => {
 							<Button 
 								variant={"outline"}
 								style={{position: "relative"}}
-								onClick={() => history.push(BASKET_ROUTE)}
+								onClick={() => navigate(BASKET_ROUTE)}
 							>
 								<Image width={28} height={28} src={shoppingCart} />
 								<span style={{color: "#0d6efd", position: "absolute", top: "-9px", left: "23px"}}>{user.qtyInBasket}</span>
