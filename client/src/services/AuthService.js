@@ -13,7 +13,13 @@ export default class AuthService {
 		return $api.post('/user/registration', {email, password})
 	}
 
-	static async logout(email, password) {
+	static async logout() {
 		return $api.post('/user/logout')
 	}
+
+	static async refresh() {
+		return $api.get('/user/refresh', {withCredentials: true})
+	}
+
+
 }

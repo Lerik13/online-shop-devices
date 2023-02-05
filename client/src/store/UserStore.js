@@ -1,8 +1,6 @@
 import {makeAutoObservable} from "mobx";
 import AuthService from "../services/AuthService";
 import {toast} from 'react-toastify'
-import axios from 'axios'
-import { API_URL } from "../config";
 import { qtyInBasket } from "../http/userAPI";
 export default class UserStore {
 	constructor() {
@@ -57,20 +55,23 @@ export default class UserStore {
 	}
 
 	async login(email, password) {
+		this.setLoading(true)
 		try {
 			const response = await AuthService.login(email, password)
 
 			localStorage.setItem('token', response.data.accessToken)
 			this.setIsAuth(true)
 			this.setUser(response.data.user)
-			
 			return true;
 		} catch (e) {
 			toast.error(e.response?.data?.message)
+		} finally {
+			this.setLoading(false)
 		}
 	}
 
 	async registration(email, password) {
+		this.setLoading(true)
 		try {
 			const response = await AuthService.registration(email, password)
 
@@ -79,12 +80,14 @@ export default class UserStore {
 			toast.success("Please check your email to complete the registration")
 		} catch (e) {
 			toast.error(e.response?.data?.message)
+		} finally {
+			this.setLoading(false)
 		}
 	}
 
 	async logout() {
 		try {
-			const response = await AuthService.logout()
+			await AuthService.logout()
 			
 			localStorage.removeItem('token')
 			this.setIsAuth(false)
@@ -97,7 +100,7 @@ export default class UserStore {
 	async checkAuth() {
 		this.setLoading(true)
 		try {
-			const response = await axios.get(`${API_URL}/user/refresh`, {withCredentials: true})
+			const response = await AuthService.refresh()
 			
 			localStorage.setItem('token', response.data.accessToken)
 			this.setIsAuth(true)
