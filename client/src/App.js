@@ -9,11 +9,17 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import './styles.css';
 
-const App = observer(() => {
+const App = () => {
 	const {user} = useContext(Context)
 		
 	if (user.isLoading) {
-		return <Spinner animation={"grow"} />
+		return (
+			<div className='loader'>
+				<Spinner animation="border" role="status">
+					<span className="visually-hidden">Loading...</span>
+				</Spinner>
+			</div>
+		)
 	}
 
 	return (
@@ -25,7 +31,7 @@ const App = observer(() => {
 
 			<ToastContainer />
 		</>
-	);
-});
+	)
+}
 
-export default App;
+export default observer(App)

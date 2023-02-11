@@ -37,6 +37,10 @@ export default class UserStore {
 		qtyInBasket().then( res => this.setQtyInBasket(res) )
 	}
 
+	get isLoading(){
+		return this._isLoading
+	}
+
 	get isAuth(){
 		return this._isAuth
 	}
@@ -86,6 +90,7 @@ export default class UserStore {
 	}
 
 	async logout() {
+		this.setLoading(true)
 		try {
 			await AuthService.logout()
 			
@@ -94,14 +99,15 @@ export default class UserStore {
 			this.setUser({})
 		} catch (e) {
 			toast.error(e.response?.data?.message)
+		} finally {
+			this.setLoading(false)
 		}
 	}
 
 	async checkAuth() {
-		this.setLoading(true)
+		//this.setLoading(true)
 		try {
 			const response = await AuthService.refresh()
-			
 			localStorage.setItem('token', response.data.accessToken)
 			this.setIsAuth(true)
 			this.setUser(response.data.user)

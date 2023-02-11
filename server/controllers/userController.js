@@ -4,6 +4,7 @@ const {Basket} = require('../models/models')
 const userService = require('../service/userService')
 
 class UserController {
+	
 	async registration(req, res, next) {
 		try {
 			const errors = validationResult(req)
@@ -28,7 +29,6 @@ class UserController {
 			await userService.activate(activationLink)
 			// redirect to Client url
 			return res.redirect(process.env.CLIENT_URL)
-			return
 		} catch (e) {
 			next(e)
 		}

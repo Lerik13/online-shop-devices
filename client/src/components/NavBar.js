@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { Context } from '../index';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { Context } from '../index';
 import {observer} from 'mobx-react-lite';
 import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE, BASKET_ROUTE } from '../utils/consts';
 import Navbar from 'react-bootstrap/Navbar';
@@ -8,7 +8,7 @@ import Nav from 'react-bootstrap/Nav';
 import {Button, Container, Image} from 'react-bootstrap';
 import shoppingCart from '../assets/shoppingCart.svg';
 
-const NavBar = observer(() => {
+const NavBar = () => {
 	const {user} = useContext(Context)
 	const navigate = useNavigate();
 
@@ -57,7 +57,7 @@ const NavBar = observer(() => {
 				</Nav>
 			</Container>
 	  </Navbar>
-	);
-});
+	)
+}
 
-export default NavBar;
+export default observer(NavBar)

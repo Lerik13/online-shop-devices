@@ -8,6 +8,7 @@ const UserDto = require('../dtos/user-dto')
 const ApiError = require('../error/ApiError')
 
 class UserService {
+
 	async registration(email, password, role) {
 		if (!email || !password) {
 			throw ApiError.badRequest('Non-correct email or password')
@@ -55,7 +56,6 @@ class UserService {
 
 		const userDto = new UserDto(user)
 		const qtyInBasket = Number(await basketService.getQtyInBasket(userDto.id))
-
 		userDto.setQtyInBasket(qtyInBasket)
 
 		const tokens = tokenService.geterateTokens({...userDto})
@@ -70,12 +70,20 @@ class UserService {
 	}
 
 	async refresh(refreshToken) {
+		console.log('--- refreshToken in userService:');
+		console.log(refreshToken)
+
 		if (!refreshToken) {
 			throw ApiError.unautorizedError()
 		}
 		const userData = tokenService.validateRefreshToken(refreshToken)
+		console.log('-- userData:')
+		console.log(userData);
 		const tokenFromDB = await tokenService.findToken(refreshToken)
+		console.log('-- tokenFromDB:')
+		console.log(tokenFromDB);
 		if (!userData || !tokenFromDB) {
+			console.log('!!! unathorized')
 			throw ApiError.unautorizedError()
 		}
 
@@ -83,8 +91,7 @@ class UserService {
 		const userDto = new UserDto(user)
 
 		const qtyInBasket = Number(await basketService.getQtyInBasket(userDto.id))
-		
-				userDto.setQtyInBasket(qtyInBasket)
+		userDto.setQtyInBasket(qtyInBasket)
 		
 		const tokens = tokenService.geterateTokens({...userDto})
 		await tokenService.saveToken(userDto.id, tokens.refreshToken)
