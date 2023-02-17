@@ -26,7 +26,7 @@ DB Schema:<br>
 ![Catalog_devices](https://github.com/Lerik13/online-shop-devices/blob/main/screenshots/1_shop.jpg?raw=true "Catalog")
 4. Device-info page 
   - Rating of device (set authorized user's rating for device + update average rating for device)
-  - Add device to basket<br>
+  - Add device to Shopping Cart<br>
 ![Device_info](https://github.com/Lerik13/online-shop-devices/blob/main/screenshots/2_device.jpg?raw=true "Device")
 5. Shopping Cart<br>
 ![Basket](https://github.com/Lerik13/online-shop-devices/blob/main/screenshots/3_basket.jpg?raw=true "Basket")
