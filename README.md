@@ -1,14 +1,18 @@
 # Online Store of Electronic Devices. 
-Client-Server app for marketing purpose
+Client-Server app for marketing purposes.
+On the main page, customer can filter devices by type and brand (+pagination).
+An authorized user can add devices to his shopping cart and mark a rating on the device-info page.
+By clicking on the basket user can observe his shopping cart list with the possibility to delete devices from his shopping cart.
+Admin user has 3 main functionality: add new type, add new brand or add new device.
 ```
 test user: user@user.com, password: user123
 admin: admin@admin.ca, password: admin123
 ```
 using stack of technologies: PERN: PostgreSQL + express + React js + Node.js
 
-using 2 types of JWT: access-token(live 30 mins) + refresh-token (save in cookie and live longer: 30 days, use it if acces-token is expired in user's browser)
-
 State-management: MobX
+
+using 2 types of JWT: access-token(live 30 mins) + refresh-token (save in cookie and live longer: 30 days, use it if acces-token is expired in user's browser)
 
 DB Schema:<br>
 ![DB Schema](https://github.com/Lerik13/online-shop-devices/blob/main/DB_schema.jpg?raw=true "DB Schema")
@@ -18,15 +22,15 @@ DB Schema:<br>
 ![Registration](https://github.com/Lerik13/online-shop-devices/blob/main/screenshots/0_register.jpg?raw=true "Registration")
 2. Login/Logout (Saving JWT-token in user's Local Storage)<br>
 ![Authorization](https://github.com/Lerik13/online-shop-devices/blob/main/screenshots/0_login.jpg?raw=true "Authorization")
-3. Shop page (main-page) - Pagination + Filter by type and brand (by default show all)<br>
+3. Main page - Filter devices by type and brand (by default show all) + Pagination<br>
 ![Catalog_devices](https://github.com/Lerik13/online-shop-devices/blob/main/screenshots/1_shop.jpg?raw=true "Catalog")
 4. Device-info page 
   - Rating of device (set authorized user's rating for device + update average rating for device)
   - Add device to basket<br>
 ![Device_info](https://github.com/Lerik13/online-shop-devices/blob/main/screenshots/2_device.jpg?raw=true "Device")
-5. Basket page<br>
+5. Shopping Cart<br>
 ![Basket](https://github.com/Lerik13/online-shop-devices/blob/main/screenshots/3_basket.jpg?raw=true "Basket")
-6. Admin panel (for user with role='ADMIN'): Add type, Add brand, Add device<br>
+6. Admin dashboard (for user with role='ADMIN'): Add type, Add brand, Add device<br>
 ![Admin2](https://github.com/Lerik13/online-shop-devices/blob/main/screenshots/5_admin.jpg?raw=true "Admin panel 2")
 ![Admin3](https://github.com/Lerik13/online-shop-devices/blob/main/screenshots/6_admin.jpg?raw=true "Admin panel 3")
 
